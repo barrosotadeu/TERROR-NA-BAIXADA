@@ -2,10 +2,19 @@ import time, random, sys
 
 itens =[]  #lista de itens que serão coletados ao longo jogo. O fato do jogador coletar um determinado item poderá acarretar mudanças na história.
 
+#essa função irá adicionar itens coletados à lista e printará um aviso para o jogador
+
+def adicionaItem(item):
+    itens.append(item)
+    print(f"O item \'{item}\' foi adicionado ao seu inventário!")
+    print("Sua lista de itens: " + str(itens) + "\n \n")
+
+
+
 #FUNÇÕES DE DIÁLOGOS CAPÍTULO 1: Essas funções irão imprimir diálogos que variarem conforme as decisões tomadas durante o jogo.
 # essa função printa os diálogos de acordo com a sua escolha de levar carlinhos junto com você, logo após sua decisão de levá-lo ou não
 def cap1_dialogo1(x):
-    if x == 's':
+    if x.lower() == 's':
         print("""
         JOAO OSÓRIO: Beleza, Carlinhos?. Vamo andando, pode entrar no carro.
         CARLINHOS:   Tô na área, meu cumpadi. Aproveita e bota aquele dire straits pro pai.
@@ -25,7 +34,7 @@ def cap1_dialogo1(x):
         JOÃO OSÓRIO: Carlinhos, chegamos. Vamos descer e investigar.
             """)
 
-    elif x == 'n':
+    elif x.lower() == 'n':
         print('''
         JOÃO OSÓRIO: Esse Carlinhos é um puta mala. Sujeito enrolado que só, ia é atrapalhar minha investigação.
                      Vou dar uma olhada no relatório dele. Dessas coisas de fofocar da vida das pessoas na internet ele entende. o Safado passa o dia no zap...
@@ -54,11 +63,11 @@ def cap1_dialogo3(x):
         if x == True:
             coisas_para_investigar = 3
             escolha_do_jogador = input("O que você irá fazer primeiro? Olhar os (b)olsos, pegar as (i)mpressões digitais ou procurar por (m)arcas ou objetos? Aperte b, i ou m para decidir: ")
-            while escolha_do_jogador != 'b' and escolha_do_jogador != 'i' and escolha_do_jogador != 'm':
+            while escolha_do_jogador.lower() != 'b' and escolha_do_jogador.lower() != 'i' and escolha_do_jogador.lower() != 'm':
                 print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar disso direito''')
                 escolha_do_jogador = input("O que você irá fazer primeiro? Olhar os (b)olsos, pegar as (i)mpressões digitais ou procurar por (m)arcas ou objetos? Aperte b, i ou m para decidir: ")
-            if escolha_do_jogador == 'b':
+            if escolha_do_jogador.lower() == 'b':
                 print('''
       JOÃO OSÓRIO: Olha, tem um papel no bolso dela. Vamos ver do que se trata.
                    hnnn... parece ser uma mensagem...
@@ -72,74 +81,62 @@ def cap1_dialogo3(x):
       CARLINHOS: Uma mensagem assinada pela Falange Rubra. Parece que o assassinato fez parte de um tipo de ritual satânico.
       JOÃO OSÓRIO: Eu não sei se podemos confiar plenamente no que está escrito aí. Pode ser alguém usando o nome deles pra confundir nossa investigação.
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
-                print('A carta foi adicionada ao seu inventário de itens!')
-                itens.append('carta')
-                print("sua lista de itens: " + str(itens) + '\n \n')
+                adicionaItem('carta')
                 coisas_para_investigar = 2
                 escolha_do_jogador = input("O que você irá fazer agora? Pegar as (i)mpressões digitais ou procurar por (m)arcas ou objetos? Aperte i ou m para decidir: ")
-                while escolha_do_jogador != 'i' and escolha_do_jogador != 'm':
+                while escolha_do_jogador.lower() != 'i' and escolha_do_jogador.lower() != 'm':
                     print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
                     escolha_do_jogador = input("O que você irá fazer agora? Pegar as (i)mpressões digitais ou procurar por (m)arcas ou objetos? Aperte i ou m para decidir: ")
-                if escolha_do_jogador == 'i':
+                if escolha_do_jogador.lower() == 'i':
                     print('''
       JOÃO OSÓRIO: Hora de coletar as impressões digitais para levarmos para o Borges analisar na delegacia. Certamente vamos descobrir alguma coisa. \n \n''')
-                    itens.append('impressões digitais no corpo da camile')
-                    print('As impressões digitais de camile foram adicionadas ao seu inventário de itens!')
-                    print('Sua lista de itens: ' + str(itens) + '\n \n')
+                    adicionaItem('impressões digitais no corpo da camile')
                     coisas_para_investigar = 1
                     escolha_do_jogador = input("Agora só falta procurar por (m)arcas e objetos. Aperte m para procurar: ")
-                    while escolha_do_jogador != 'm':
+                    while escolha_do_jogador.lower() != 'm':
                         print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
                         escolha_do_jogador = input("Agora só falta procurar por (m)arcas e objetos. Aperte m para procurar: ")
-                    if escolha_do_jogador == 'm':
+                    if escolha_do_jogador.lower() == 'm':
                         print('''
       JOÃO OSÓRIO: Hnnn...Podemos ver marcas nas cordas e no pescoço. Ela provavelente foi esfaqueada.
                    Há também marcas nos pulsos, o que pode indicar que ela foi amarrada.
                    Hnnn... o que é isso? Uma faca ensaguentada próxima ao corpo... e luvas?
-                   Vou coletar esses objetos. \n \n''')
-                        itens.append('faca')
-                        itens.append('luvas')
-                        print('A faca e a luva foram adicionadas ao seu inventário de itens!')
-                        print('Sua lista de itens: ' + str(itens) + '\n \n')
+                   Vou coletar estes objetos. \n \n''')
+                        adicionaItem('faca')
+                        adicionaItem('luvas')
                         coisas_para_investigar = 0
-                elif escolha_do_jogador == 'm':
+                elif escolha_do_jogador.lower() == 'm':
                     print('''
       JOÃO OSÓRIO: Hnnn...Podemos ver marcas nas cordas e no pescoço. Ela provavelente foi esfaqueada.
                    Há também marcas nos pulsos, o que pode indicar que ela foi amarrada.
                    Hnnn... o que é isso? Uma faca ensaguentada próxima ao corpo... e luvas?
-                   Vou coletar esses objetos. \n \n''')
-                    itens.append('faca')
-                    itens.append('luvas')
-                    print('A faca e a luva foram adicionadas ao seu inventário de itens!')
-                    print('Sua lista de itens: ' + str(itens) + '\n \n')
+                   Vou coletar estes objetos. \n \n''')
+                    adicionaItem('faca')
+                    adicionaItem('luva')
                     coisas_para_investigar = 1
                     escolha_do_jogador = input('Agora só falta pegar as impressões. Aperte i para coletá-las: ')
-                    while escolha_do_jogador != 'i':
+                    while escolha_do_jogador.lower() != 'i':
                         print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
                         escolha_do_jogador = input('Agora só falta pegar as impressões. Aperte i para coletá-las: ')
-                    if escolha_do_jogador == 'i':
+                    if escolha_do_jogador.lower() == 'i':
                         print('''
       JOÃO OSÓRIO: Hora de coletar as impressões digitais para levarmos para o Borges analisar na delegacia. Certamente vamos descobrir alguma coisa. \n \n''')
-                        itens.append('impressões digitais no corpo da camile')
-                        print('As impressões digitais de camile foram adicionadas ao seu inventário de itens!')
-                        print('Sua lista de itens: ' + str(itens) + '\n \n')
+                        adicionaItem('impressões digitais no corpo da camile')
                         coisas_para_investigar = 0
-            elif escolha_do_jogador == 'i':
+            elif escolha_do_jogador.lower() == 'i':
                 print('''
       JOÃO OSÓRIO: Hora de coletar as impressões digitais para levarmos para o Borges analisar na delegacia. Certamente vamos descobrir alguma coisa. \n \n''')
-                itens.append('impressões digitais no corpo da camile')
-                print('As impressões digitais de camile foram adicionadas ao seu inventário de itens!')
-                print('Sua lista de itens: ' + str(itens) + '\n \n')
+                adicionaItem('impressões digitais no corpo da camile')
                 coisas_para_investigar = 2
                 escolha_do_jogador = input("O que você irá fazer agora? Olhar nos (b)olsos da jovem ou procurar por (m)arcas ou objetos? Aperte b ou m para decidir: ")
-                while escolha_do_jogador != 'b' and escolha_do_jogador != 'm':
+                while escolha_do_jogador.lower() != 'b' and escolha_do_jogador != 'm':
                     print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
                     escolha_do_jogador = input("O que você irá fazer agora? Olhar nos (b)olsos da jovem ou procurar por (m)arcas ou objetos? Aperte b ou m para decidir: ")
-                if escolha_do_jogador == 'b':
+                if escolha_do_jogador.lower() == 'b':
                     print('''
       JOÃO OSÓRIO: Olha, tem um papel no bolso dela. Vamos ver do que se trata.
                    hnnn... parece ser uma mensagem...
@@ -154,42 +151,37 @@ def cap1_dialogo3(x):
       JOÃO OSÓRIO: Eu não sei se podemos confiar plenamente no que está escrito aí. Pode ser alguém usando o nome deles pra confundir nossa investigação.
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
                     print('A carta foi adicionada ao seu inventário de itens!')
-                    itens.append('carta')
-                    print("sua lista de itens: " + str(itens) + '\n \n')
+                    adicionaItem('carta')
                     coisas_para_investigar = 1
                     escolha_do_jogador = input("Agora só falta procurar por (m)arcas e objetos. Aperte m para procurar: ")
-                    while escolha_do_jogador != 'm':
+                    while escolha_do_jogador.lower() != 'm':
                         print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
                         escolha_do_jogador = input("Agora só falta procurar por (m)arcas e objetos. Aperte m para procurar: ")
-                    if escolha_do_jogador == 'm':
+                    if escolha_do_jogador.lower() == 'm':
                         print('''
       JOÃO OSÓRIO: Hnnn...Podemos ver marcas nas cordas e no pescoço. Ela provavelente foi esfaqueada.
                    Há também marcas nos pulsos, o que pode indicar que ela foi amarrada.
                    Hnnn... o que é isso? Uma faca ensaguentada próxima ao corpo... e luvas?
-                   Vou coletar esses objetos. \n \n''')
-                        itens.append('faca')
-                        itens.append('luvas')
-                        print('A faca e a luva foram adicionadas ao seu inventário de itens!')
-                        print('Sua lista de itens: ' + str(itens) + '\n \n')
+                   Vou coletar estes objetos. \n \n''')
+                        adicionaItem('faca')
+                        adicionaItem('luvas')
                         coisas_para_investigar = 0
-                elif escolha_do_jogador == 'm':
+                elif escolha_do_jogador.lower() == 'm':
                     print('''
       JOÃO OSÓRIO: Hnnn...Podemos ver marcas nas cordas e no pescoço. Ela provavelente foi esfaqueada.
                    Há também marcas nos pulsos, o que pode indicar que ela foi amarrada.
                    Hnnn... o que é isso? Uma faca ensaguentada próxima ao corpo... e luvas?
-                   Vou coletar esses objetos. \n \n''')
-                    itens.append('faca')
-                    itens.append('luvas')
-                    print('A faca e a luva foram adicionadas ao seu inventário de itens!')
-                    print('Sua lista de itens: ' + str(itens) + '\n \n')
+                   Vou coletar estes objetos. \n \n''')
+                    adicionaItem('faca')
+                    adicionaItem('luvas')
                     coisas_para_investigar = 1
                     escolha_do_jogador = input("Agora só falta procurar por pistas nos (b)olsos da jovem. Aperte b para procurar: ")
-                    while escolha_do_jogador != 'b':
+                    while escolha_do_jogador.lower() != 'b':
                         print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
                         escolha_do_jogador = input("Agora só falta procurar por pistas nos (b)olsos da jovem. Aperte b para procurar: ")
-                    if escolha_do_jogador == 'b':
+                    if escolha_do_jogador.lower() == 'b':
                         print('''
       JOÃO OSÓRIO: Olha, tem um papel no bolso dela. Vamos ver do que se trata.
                    hnnn... parece ser uma mensagem...
@@ -203,27 +195,23 @@ def cap1_dialogo3(x):
       CARLINHOS: Uma mensagem assinada pela Falange Rubra. Parece que o assassinato fez parte de um tipo de ritual satânico.
       JOÃO OSÓRIO: Eu não sei se podemos confiar plenamente no que está escrito aí. Pode ser alguém usando o nome deles pra confundir nossa investigação.
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
-                        print('A carta foi adicionada ao seu inventário de itens!')
-                        itens.append('carta')
-                        print("sua lista de itens: " + str(itens) + '\n \n')
+                        adicionaItem('carta')
                         coisas_para_investigar = 0
-            elif escolha_do_jogador == 'm':
+            elif escolha_do_jogador.lower() == 'm':
                 print('''
       JOÃO OSÓRIO: Hnnn...Podemos ver marcas nas cordas e no pescoço. Ela provavelente foi esfaqueada.
                    Há também marcas nos pulsos, o que pode indicar que ela foi amarrada.
                    Hnnn... o que é isso? Uma faca ensaguentada próxima ao corpo... e luvas?
-                   Vou coletar esses objetos. \n \n''')
-                itens.append('faca')
-                itens.append('luvas')
-                print('A faca e a luva foram adicionadas ao seu inventário de itens!')
-                print('Sua lista de itens: ' + str(itens) + '\n \n')
+                   Vou coletar estes objetos. \n \n''')
+                adicionaItem('faca')
+                adicionaItem('luvas')
                 coisas_para_investigar = 2
                 escolha_do_jogador = input("O que você irá fazer agora? Olhar nos (b)olsos da jovem ou coletar as (i)mpressões digitais? Aperte b ou i para decidir ")
-                while escolha_do_jogador != 'b' and escolha_do_jogador != 'i':
+                while escolha_do_jogador.lower() != 'b' and escolha_do_jogador.lower() != 'i':
                     print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
                     escolha_do_jogador = input("O que você irá fazer agora? Olhar nos (b)olsos da jovem ou coletar as (i)mpressões digitais? Aperte b ou i para decidir ")
-                if escolha_do_jogador == 'b':
+                if escolha_do_jogador.lower() == 'b':
                     print('''
       JOÃO OSÓRIO: Olha, tem um papel no bolso dela. Vamos ver do que se trata.
                    hnnn... parece ser uma mensagem...
@@ -237,34 +225,28 @@ def cap1_dialogo3(x):
       CARLINHOS: Uma mensagem assinada pela Falange Rubra. Parece que o assassinato fez parte de um tipo de ritual satânico.
       JOÃO OSÓRIO: Eu não sei se podemos confiar plenamente no que está escrito aí. Pode ser alguém usando o nome deles pra confundir nossa investigação.
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
-                    print('A carta foi adicionada ao seu inventário de itens!')
-                    itens.append('carta')
-                    print("sua lista de itens: " + str(itens) + '\n \n')
+                    adicionaItem('carta')
                     coisas_para_investigar = 1
                     escolha_do_jogador = input('Agora só falta pegar as impressões. Aperte i para coletá-las: ')
-                    while escolha_do_jogador != 'i':
+                    while escolha_do_jogador.lower() != 'i':
                         print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
-                    if escolha_do_jogador == 'i':
+                    if escolha_do_jogador.lower() == 'i':
                         print('''
       JOÃO OSÓRIO: Hora de coletar as impressões digitais para levarmos para o Borges analisar na delegacia. Certamente vamos descobrir alguma coisa. \n \n''')
-                        itens.append('impressões digitais no corpo da camile')
-                        print('As impressões digitais de camile foram adicionadas ao seu inventário de itens!')
-                        print('Sua lista de itens: ' + str(itens) + '\n \n')
+                        adicionaItem('impressões digitais no corpo da camile')
                         coisas_para_investigar = 0
-                elif escolha_do_jogador == 'i':
+                elif escolha_do_jogador.lower() == 'i':
                         print('''
       JOÃO OSÓRIO: Hora de coletar as impressões digitais para levarmos para o Borges analisar na delegacia. Certamente vamos descobrir alguma coisa. \n \n''')
-                        itens.append('impressões digitais no corpo da camile')
-                        print('As impressões digitais de camile foram adicionadas ao seu inventário de itens!')
-                        print('Sua lista de itens: ' + str(itens) + '\n \n')
+                        adicionaItem('impressões digitais no corpo da camile')
                         coisas_para_investigar = 1
                         escolha_do_jogador = input("Agora só falta procurar por pistas nos (b)olsos da jovem. Aperte b para procurar: ")
-                        while escolha_do_jogador != 'b':
+                        while escolha_do_jogador.lower() != 'b':
                             print('''
       CARLINHOS: João, cê tá doido? Para de viajar e vamo logo olhar isso direito''')
                             input("Agora só falta procurar por pistas nos (b)olsos da jovem. Aperte b para procurar: ")
-                        if escolha_do_jogador == 'b':
+                        if escolha_do_jogador.lower() == 'b':
                             print('''
       JOÃO OSÓRIO: Olha, tem um papel no bolso dela. Vamos ver do que se trata.
                    hnnn... parece ser uma mensagem...
@@ -278,9 +260,7 @@ def cap1_dialogo3(x):
       CARLINHOS: Uma mensagem assinada pela Falange Rubra. Parece que o assassinato fez parte de um tipo de ritual satânico.
       JOÃO OSÓRIO: Eu não sei se podemos confiar plenamente no que está escrito aí. Pode ser alguém usando o nome deles pra confundir nossa investigação.
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
-                            print('A carta foi adicionada ao seu inventário de itens!')
-                            itens.append('carta')
-                            print("sua lista de itens: " + str(itens) + '\n \n')
+                            adicionaItem('carta')
                             coisas_para_investigar = 0
 
 
@@ -320,15 +300,15 @@ DELEGADO TEIXEIRA: Tá beleza, João. O carlinhos fez uma pré investigação. V
                    Você quer que eu chame ele pra te acompanhar nessa investigação?""")
 
 while True:
-    resposta_carlinhos = input("Responda (s)im ou (n)ão ")
-    if resposta_carlinhos != 's' and resposta_carlinhos != 'n':
+    resposta_carlinhos = input("Responda (s)im ou (n)ão. Aperte s ou n para decidir ")
+    if resposta_carlinhos.lower() != 's' and resposta_carlinhos.lower() != 'n':
         print("DELEGADO TEIXEIRA: Responde direito, João. Tá de ressaca?")
         continue
 
-    if resposta_carlinhos == 's':
+    if resposta_carlinhos.lower() == 's':
         carlinhos = True
         break
-    elif resposta_carlinhos == 'n':
+    elif resposta_carlinhos.lower() == 'n':
         carlinhos = False
         break
 
