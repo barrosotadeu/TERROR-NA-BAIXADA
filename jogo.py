@@ -2,16 +2,16 @@ import time, random, sys, pyperclip
 
 suspeitos = {} #dicionário com nomes de suspeitos e uma breve descrição. Conforme
 
- 
- 
+
+
 def adicionaSuspeito(suspeito, descricao):    #essa função irá adicionar suspeitos e suas descrições ao dicionário
     suspeitos.setdefault(suspeito, descricao)
     print(f'{suspeito} foi adicionado à sua lista de suspeitos!')
     print(f'Descrição: {descricao}\n\n')
     print('Sua lista de suspeitos: ' + ', '.join(list(suspeitos.keys())) + '.\n\n')
     print('\n\n')
-     
-    
+
+
 
 itens =[]  #lista de itens que serão coletados ao longo jogo. O fato do jogador coletar um determinado item poderá acarretar mudanças na história.
 
@@ -55,7 +55,7 @@ def cap1_dialogo1(x):
                      Hnn... Namorado ciumento? Um crime passional, talvez? E essa igreja? Tem umas coisas estranhas né... Vou investigar isso tudo.
 
                     Bom, cheguei no local do crime. Hora de sair do carro''')
-        print('\n\n')            
+        print('\n\n')
         adicionaSuspeito('Diogo', 'Namorado de Camile. Aparentemente, um jovem de bem, embora um pouco ciumento. Terá sido um crime passional?')
         adicionaSuspeito('Pastor Santiago', 'Pastor da Igreja Convenção de Jesus Cristo, denominação neopentecostal muito popular na região da baixada Fluminense. Recentemente, foi acusado de envolvimento em um escândalo sexual com fiéis. Será que está envolvido com o caso de Camile?')
 
@@ -63,7 +63,7 @@ def cap1_dialogo1(x):
 def cap1_dialogo2(x):
     if x == True:
         print('''
-     CARLINHOS:   João, por onde nós vamos começar a vascular?
+     CARLINHOS:   João, por onde nós vamos começar a vasculhar?
      JOÃO OSÓRIO: Olha, temos que olhar o corpo e ver se achamos algum tipo de marca que indique como o assassinato ocorreu.
                   Temos que colher também as impressões digitais no corpo e também nos objetos ao redor.Aliás, os objetos podem revelar algo sobre o crime...
      CARLINHOS:   Beleza, João. Mas não esquece de dar uma boa olhada nos bolsos da calça dela, hein. Tô com um palpite que lá pode ter algo.''')
@@ -99,6 +99,7 @@ def cap1_dialogo3(x):
       JOÃO OSÓRIO: Eu não sei se podemos confiar plenamente no que está escrito aí. Pode ser alguém usando o nome deles pra confundir nossa investigação.
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
                 adicionaItem('carta')
+                adicionaSuspeito('Falange Rubra', 'Uma das maiores facções criminosas do estado do Rio de Janeiro. O conteúdo da carta sugere que o assassinato foi parte de algum tipo de ritual satânico. Seriam eles os responsáveis pela morte de Camile?')
                 coisas_para_investigar = 2
                 escolha_do_jogador = input("O que você irá fazer agora? Pegar as (i)mpressões digitais ou procurar por (m)arcas ou objetos? Aperte i ou m para decidir: ")
                 while escolha_do_jogador.strip().lower() != 'i' and escolha_do_jogador.strip().lower() != 'm':
@@ -169,6 +170,7 @@ def cap1_dialogo3(x):
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
                     print('A carta foi adicionada ao seu inventário de itens!')
                     adicionaItem('carta')
+                    adicionaSuspeito('Falange Rubra', 'Uma das maiores facções criminosas do estado do Rio de Janeiro. O conteúdo da carta sugere que o assassinato foi parte de algum tipo de ritual satânico. Seriam eles os responsáveis pela morte de Camile?')
                     coisas_para_investigar = 1
                     escolha_do_jogador = input("Agora só falta procurar por (m)arcas e objetos. Aperte m para procurar: ")
                     while escolha_do_jogador.strip().lower() != 'm':
@@ -214,6 +216,7 @@ def cap1_dialogo3(x):
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
                         adicionaItem('carta')
                         coisas_para_investigar = 0
+                        adicionaSuspeito('Falange Rubra', 'Uma das maiores facções criminosas do estado do Rio de Janeiro. O conteúdo da carta sugere que o assassinato foi parte de algum tipo de ritual satânico. Seriam eles os responsáveis pela morte de Camile?')
             elif escolha_do_jogador.strip().lower() == 'm':
                 print('''
       JOÃO OSÓRIO: Hnnn...Podemos ver marcas nas cordas e no pescoço. Ela provavelente foi esfaqueada.
@@ -243,6 +246,7 @@ def cap1_dialogo3(x):
       JOÃO OSÓRIO: Eu não sei se podemos confiar plenamente no que está escrito aí. Pode ser alguém usando o nome deles pra confundir nossa investigação.
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
                     adicionaItem('carta')
+                    adicionaSuspeito('Falange Rubra', 'Uma das maiores facções criminosas do estado do Rio de Janeiro. O conteúdo da carta sugere que o assassinato foi parte de algum tipo de ritual satânico. Seriam eles os responsáveis pela morte de Camile?')
                     coisas_para_investigar = 1
                     escolha_do_jogador = input('Agora só falta pegar as impressões. Aperte i para coletá-las: ')
                     while escolha_do_jogador.strip().lower() != 'i':
@@ -278,6 +282,7 @@ def cap1_dialogo3(x):
       JOÃO OSÓRIO: Eu não sei se podemos confiar plenamente no que está escrito aí. Pode ser alguém usando o nome deles pra confundir nossa investigação.
       CARLINHOS : Não sei não, João. Esses vagabundos são capazes de tudo.\n \n''')
                             adicionaItem('carta')
+                            adicionaSuspeito('Falange Rubra', 'Uma das maiores facções criminosas do estado do Rio de Janeiro. O conteúdo da carta sugere que o assassinato foi parte de algum tipo de ritual satânico. Seriam eles os responsáveis pela morte de Camile?')
                             coisas_para_investigar = 0
 
 
@@ -329,24 +334,34 @@ def cap1_dialogo3(x):
                 break
 
 def cap1_dialogo4(x):
-    while True:
-        if x == True:
-            escolhas = 3
+    
+    if x == True:
+            
+        print('''
+        JOÃO OSÓRIO: Ok, carlinhos. Agora temos que prosseguir nossa investigação à luz das evidências coletadas
+        e dos suspeitos que temos. Preciso fazer uma visita ao namorado e à igreja, ambos mencionados no seu relatório.
+        Também precisamos levar as impressões digitais, a faca e a luva para o Bores analisar. O que você acha, Carlinhos?
+        Onde devemos ir primeiro?
+        CARLINHOS: João, acho que devemos ir atrás da Falange Rubra logo. Se o que está escrito na carta for verdade,
+        só Jesus sabe que tipo de atrocidade eles estão fazendo por aí. Parece que eles tão metido com esse negócio de ritual
+        satânico. Talvez o pastar da igreja saiba alguma coisa.
+        ''')
+        escolha_do_jogador = input('O que você irá fazer agora? Levar o material coletado para o (B)orges, ir falar com o (n)amorado ou fazer uma visita à (i)greja? Aperte b, n ou i para decidir:')
+        while escolha_do_jogador.strip().lower() != 'b' and escolha_do_jogador.strip().lower() != 'n' and escolha_do_jogador.strip().lower() != 'i':
             print('''
-            JOÃO OSÓRIO: Ok, carlinhos. Agora temos que prosseguir nossa investigação à luz das evidências coletadas
-            e dos suspeitos que temos. Preciso fazer uma visita ao namorado e à igreja, ambos mencionados no seu relatório.
-            Também precisamos levar as impressões digitais, a faca e a luva para o Bores analisar. O que você acha, Carlinhos?
-            Onde devemos ir primeiro?
-            CARLINHOS: João, acho que devemos ir atrás da Falange Rubra logo. Se o que está escrito na carta for verdade,
-            só Jesus sabe que tipo de atrocidade eles estão fazendo por aí. Parece que eles tão metido com esse negócio de ritual
-            satânico. Talvez o pastar da igreja saiba alguma coisa.
-            ''')
+            CARLINHOS: Bora, João. Decide longo pra onde nós vamos, campeão. Já falei que na igreja derrepente a gente descobre algo.''')
             escolha_do_jogador = input('O que você irá fazer agora? Levar o material coletado para o (B)orges, ir falar com o (n)amorado ou fazer uma visita à (i)greja? Aperte b, n ou i para decidir:')
-            while escolha_do_jogador.strip().lower() != 'b' and escolha_do_jogador.strip().lower() != 'n' and escolha_do_jogador.strip().lower() != 'i':
-                print('''
-                CARLINHOS: Bora, João. Decide longo pra onde nós vamos, campeão. Já falei que na igreja derrepente a gente descobre algo.''')
-                escolha_do_jogador = input('O que você irá fazer agora? Levar o material coletado para o (B)orges, ir falar com o (n)amorado ou fazer uma visita à (i)greja? Aperte b, n ou i para decidir:') 
-      
+        if escolha_do_jogador.strip().lower() == 'i':
+            print('JOÃO OSÓRIO: Tá certo, meu chapa. Vamos logo dar uma olhada na igreja\n\n\n')
+            igreja(carlinhos)
+                
+def igreja(x):    #função que será chamada caso o jogador escolha a opção de ir à igreja nos diálogos a partir do cap1 diálogo4
+    if x == True:
+        print('IGREJA CONVENÇÃO DE JESUS CRISTO')
+        print('''
+        JOÃO OSÓRIO: Chegamos, Carlinhos. Bora lá falar com esse tal pastor.
+        CARLINHOS: Sim, meu camarada. Mas vai com calma, o pastor é um homem poderoso aqui na região, e pode ser uma testemunha importante para o nosso caso.''')
+
 
 #introdução do jogo
 print('''TERROR NA BAIXADA FLUMINENSE'''.rjust(100))
