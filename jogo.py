@@ -1,27 +1,6 @@
 import time, random, sys, pyperclip
-
-suspeitos = {} #dicionário com nomes de suspeitos e uma breve descrição. Conforme
-
-
-
-def adicionaSuspeito(suspeito, descricao):    #essa função irá adicionar suspeitos e suas descrições ao dicionário
-    suspeitos.setdefault(suspeito, descricao)
-    print(f'{suspeito} foi adicionado à sua lista de suspeitos!')
-    print(f'Descrição: {descricao}\n\n')
-    print('Sua lista de suspeitos: ' + ', '.join(list(suspeitos.keys())) + '.\n\n')
-    print('\n\n')
-
-
-
-itens =[]  #lista de itens que serão coletados ao longo jogo. O fato do jogador coletar um determinado item poderá acarretar mudanças na história.
-
-#essa função irá adicionar itens coletados à lista e printará um aviso para o jogador
-
-def adicionaItem(item):
-    itens.append(item)
-    print(f"O item \'{item}\' foi adicionado ao seu inventário!")
-    print("Sua lista de itens: "  +  ', '.join(itens) + ".\n \n")
-
+from adiciona_suspeito import adicionaSuspeito, suspeitos
+from adiciona_item import adicionaItem, itens
 
 
 #FUNÇÕES DE DIÁLOGOS CAPÍTULO 1: Essas funções irão imprimir diálogos que variarem conforme as decisões tomadas durante o jogo.
@@ -334,9 +313,9 @@ def cap1_dialogo3(x):
                 break
 
 def cap1_dialogo4(x):
-    
+
     if x == True:
-            
+
         print('''
         JOÃO OSÓRIO: Ok, carlinhos. Agora temos que prosseguir nossa investigação à luz das evidências coletadas
         e dos suspeitos que temos. Preciso fazer uma visita ao namorado e à igreja, ambos mencionados no seu relatório.
@@ -344,7 +323,7 @@ def cap1_dialogo4(x):
         Onde devemos ir primeiro?
         CARLINHOS: João, acho que devemos ir atrás da Falange Rubra logo. Se o que está escrito na carta for verdade,
         só Jesus sabe que tipo de atrocidade eles estão fazendo por aí. Parece que eles tão metido com esse negócio de ritual
-        satânico. Talvez o pastar da igreja saiba alguma coisa.
+        satânico. Talvez o pastor da igreja saiba alguma coisa.
         ''')
         escolha_do_jogador = input('O que você irá fazer agora? Levar o material coletado para o (B)orges, ir falar com o (n)amorado ou fazer uma visita à (i)greja? Aperte b, n ou i para decidir:')
         while escolha_do_jogador.strip().lower() != 'b' and escolha_do_jogador.strip().lower() != 'n' and escolha_do_jogador.strip().lower() != 'i':
@@ -354,14 +333,24 @@ def cap1_dialogo4(x):
         if escolha_do_jogador.strip().lower() == 'i':
             print('JOÃO OSÓRIO: Tá certo, meu chapa. Vamos logo dar uma olhada na igreja\n\n\n')
             igreja(carlinhos)
-                
+
 def igreja(x):    #função que será chamada caso o jogador escolha a opção de ir à igreja nos diálogos a partir do cap1 diálogo4
     if x == True:
         print('IGREJA CONVENÇÃO DE JESUS CRISTO')
         print('''
         JOÃO OSÓRIO: Chegamos, Carlinhos. Bora lá falar com esse tal pastor.
-        CARLINHOS: Sim, meu camarada. Mas vai com calma, o pastor é um homem poderoso aqui na região, e pode ser uma testemunha importante para o nosso caso.''')
-
+        CARLINHOS: Sim, meu camarada. Mas vai com calma, o pastor é um homem poderoso aqui na região, e pode ser uma testemunha importante para o nosso caso.
+        JOÃO OSÓRIO: Carlinhos, meu consgrado, ninguém está acima da lei. Vamos entrando.
+        
+        PASTOR SANTIAGO: Boa noite, meus caros heróis policiais. O que os traz até a minha humilde congregação?
+        JOÃO OSÓRIO: Humilde? Não é o que eu ando ouvindo por aí. Parece que a Conveção de Jesus Cristo é uma das instituições religiosas mais ricas do país.
+        PASTOR SANTIAGO: Ora, aqueles que andam no caminho de Deus, Ele os faz prosperar. No mais, afirmo com convicção que toda essa prosperidade veio de maneira totalmente lícita e honesta, ao contrário do que podem dizer certos escarnecedores por aí.
+        JOÃO OSÓRIO: Isso o senhor terá que provar para outro investigador... O caso que quero tratar hoje é outro.
+        CARLINHOS: Pastor, perdoe os maus modos do meu colega, ele ainda é um homem do mundo. Mas eu hei de convertê-lo.
+        JOÃO OSÓRIO: O caso que queremos tratar hoje é o do assassinato da jovem Camile, no bairro de cabuçu. O senhor deve ter ficado sabendo.
+        PASTOR SANTIAGO: É claro que fiquei, um horror. Que tipo de atribulado cometeria um crime tão bárbaro?
+        ''')
+    
 
 #introdução do jogo
 print('''TERROR NA BAIXADA FLUMINENSE'''.rjust(100))
